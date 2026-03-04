@@ -14,4 +14,4 @@ def build_info():
         "commit": os.getenv("COMMIT_SHA", "local"),
         "build_time": os.getenv("BUILD_TIME", str(datetime.utcnow()))
     }
-test
+#test commit for CI pipeline trigger

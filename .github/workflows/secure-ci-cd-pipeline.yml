@@ -33,7 +33,15 @@ jobs:
       - name: Build Docker Image
         run: docker build -t secure-fastapi .
 
-      - name: Run Trivy (Vulnerability Scan)
+      - name: Run Trivy SCA and IaC scan
         uses: aquasecurity/trivy-action@0.10.0
+        id: trivy
+        continue-on-error: false
         with:
-          image-ref: secure-fastapi
+          scan-type: fs
+          vulnerability-type: 'os,library'
+          severity: 'HIGH,CRITICAL'
+          ignore-unfixed: true
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+          exit-code: 1
